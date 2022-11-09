@@ -1,7 +1,11 @@
 const express = require('express')
+const router = express.Router()
 const app = express()
 const mongoose = require('mongoose')
 require('dotenv').config()
+
+const routes = require('./api/routes')
+
 
 const PORT = 3001
 const DB = process.env.MONGODB_URL
@@ -23,3 +27,6 @@ mongoose.connect(DB)
 app.get('/', (req, res) => {
   res.send('hey')
 })
+
+app.use(express.json())
+app.use('/', routes)
