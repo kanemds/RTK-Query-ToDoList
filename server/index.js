@@ -1,5 +1,4 @@
 const express = require('express')
-const router = express.Router()
 const app = express()
 const mongoose = require('mongoose')
 require('dotenv').config()
@@ -20,9 +19,6 @@ mongoose.connect(DB)
   .catch(error => {
     console.log(error)
   })
-
-
-
 
 app.get('/', (req, res) => {
   res.send('hey')
