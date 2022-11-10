@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const deleteUser = require('../../controllers/deleteControoler')
-const register = require('../../controllers/registerController')
-const userUpdate = require('../../controllers/updateController')
-const signIn = require('../../controllers/signInController')
+const deleteUser = require('../../controllers/user/deleteController')
+const register = require('../../controllers/user/registerController')
+const userUpdate = require('../../controllers/user/updateController')
+const signIn = require('../../controllers/user/signInController')
 
 router.post('/register', register)
 router.post('/signin', signIn)
