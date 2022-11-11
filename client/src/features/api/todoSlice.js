@@ -18,8 +18,16 @@ export const todoApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: todo
       })
+    }),
+    deleteTodo: builder.mutation({
+      query: ({ id }) => ({
+        url: `/todo-list/${id}`,
+        method: 'DELETE',
+        body: id
+      })
     })
   })
 })
 
-export const { useGetTodosQuery } = todoApiSlice
+
+export const { useGetTodosQuery, useUpdateTodoMutation, useAddTodoMutation, useDeleteTodoMutation } = todoApiSlice
