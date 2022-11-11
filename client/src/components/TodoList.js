@@ -4,15 +4,37 @@ import { pink } from '@mui/material/colors'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { Paper, TextField, Button, Box, Checkbox, ButtonGroup, Typography } from '@mui/material'
 import AutorenewIcon from '@mui/icons-material/Autorenew'
+import { useGetTodosQuery } from '../features/api/todoSlice'
 
 const TodoList = () => {
 
   const [todo, setTodo] = useState("")
 
+  const {
+    data: todos,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetTodosQuery()
+
+
+
   const handleSubmit = e => {
     e.preventDefault()
     setTodo("")
   }
+
+  let content
+
+  if (isLoading) {
+    content = <Typography variant="h6" >Loading...</Typography>
+  } else if (isSuccess) {
+    content = JSON.stringify(todos)
+  } else if (isError) {
+    content = <Typography variant="h6" >{error}</Typography>
+  }
+
 
   return (
 
@@ -43,6 +65,7 @@ const TodoList = () => {
           <Button>  <DeleteForeverIcon sx={{ color: pink[500] }} /></Button>
         </Box>
       </Paper>
+      {content}
     </Box>
 
   )
