@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import { pink } from '@mui/material/colors'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
@@ -6,6 +6,14 @@ import { Paper, TextField, Button, Box, Checkbox, ButtonGroup, Typography } from
 import AutorenewIcon from '@mui/icons-material/Autorenew'
 
 const TodoList = () => {
+
+  const [todo, setTodo] = useState("")
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    setTodo("")
+  }
+
   return (
 
     <Box sx={{ display: "flex", justifyContent: "center", pt: 6 }}>
@@ -17,8 +25,11 @@ const TodoList = () => {
           display: "flex",
           p: 2
         }}>
-          <TextField fullWidth label="What would you like to do Today?" variant="outlined" />
-          <Button> <AddCircleOutlineIcon /></Button>
+          <TextField fullWidth label="What would you like to do Today?" variant="outlined"
+            value={todo}
+            onChange={e => setTodo(e.target.value)}
+          />
+          <Button onClick={handleSubmit}> <AddCircleOutlineIcon /></Button>
         </Box>
         <Box sx={{
           width: 650,
