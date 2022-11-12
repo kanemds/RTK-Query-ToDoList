@@ -4,6 +4,7 @@ export const todoApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     getTodos: builder.query({
       query: () => '/todo-list',
+      // transformErrorResponse, another middleware 
       providesTags: ['Todos']
     }),
     addTodo: builder.mutation({
