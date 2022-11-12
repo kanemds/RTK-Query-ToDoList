@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
   jwt.verify(currentToken, process.env.ACCESS_TOKEN_SECRET, (error, verify) => {
     if (error) return res.status(403).json("Not Authenticated")
     req.verify = verify
-    console.log(req.verify)
+
     next()
   })
 }

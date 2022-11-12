@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 require('dotenv').config()
+const cookieParser = require('cookie-parser')
 
 const routes = require('./api/routes')
 
@@ -24,5 +25,6 @@ app.get('/', (req, res) => {
   res.send('hey')
 })
 
+app.use(cookieParser())
 app.use(express.json())
 app.use('/', routes)
