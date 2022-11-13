@@ -1,6 +1,11 @@
 import React from 'react'
-import { useGetUsersQuery } from '../features/api/userSlice'
+import { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from '../features/api/userSlice'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import { pink } from '@mui/material/colors'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { Paper, TextField, Button, Box, Checkbox, ButtonGroup, Typography } from '@mui/material'
+import AutorenewIcon from '@mui/icons-material/Autorenew'
+import EditIcon from '@mui/icons-material/Edit'
 
 const UserList = () => {
 
@@ -12,7 +17,8 @@ const UserList = () => {
     error
   } = useGetUsersQuery()
 
-  console.log(users)
+  const [updateUser] = useUpdateUserMutation()
+  const [deleteUser] = useDeleteUserMutation()
 
 
   let content
