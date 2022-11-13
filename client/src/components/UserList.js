@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 import { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from '../features/api/userSlice'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import { pink } from '@mui/material/colors'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import { Paper, TextField, Button, Box, Checkbox, ButtonGroup, Typography } from '@mui/material'
+import { Paper, TextField, Button, Box, Typography } from '@mui/material'
 import AutorenewIcon from '@mui/icons-material/Autorenew'
 import EditIcon from '@mui/icons-material/Edit'
 
 const UserList = () => {
 
   const [update, setUpdate] = useState("")
-  const [isDisable, setIsDisable] = useState(true)
 
   const {
     data: users,
@@ -23,15 +21,6 @@ const UserList = () => {
   const [updateUser] = useUpdateUserMutation()
   const [deleteUser] = useDeleteUserMutation()
 
-  const handleDisable = () => {
-    if (isDisable) {
-      setIsDisable(false)
-    }
-    if (!isDisable) {
-      setIsDisable(true)
-    }
-  }
-
 
   let content
 
@@ -39,6 +28,8 @@ const UserList = () => {
     content = <Typography variant="h6" >Loading...</Typography>
   } else if (isSuccess) {
     content = users.map(user => {
+
+
       return (
         <Box key={user._id}
           sx={{
@@ -47,15 +38,15 @@ const UserList = () => {
             display: "flex",
             p: 2
           }}>
-          <TextField disabled={isDisable} fullWidth defaultValue={user.name} variant="outlined"
+          <TextField disabled={user.disabledEdit}
+            fullWidth defaultValue={user.name} variant="outlined"
             onChange={e => setUpdate(e.target.value)}
           />
 
-          <Button onClick={handleDisable}>
-            <EditIcon />
-          </Button>
-          <Button onClick={() => updateUser({ ...user, name: update })}>
-            <AutorenewIcon color="primary" />
+          <Button onClick={
+            () => { updateUser({ ...user, name: update || user.name, disabledEdit: !user.disabledEdit }) }
+          }>
+            {user.disabledEdit ? <EditIcon /> : <AutorenewIcon />}
           </Button>
           <Button onClick={() => deleteUser({ id: user._id })}>
             <DeleteForeverIcon sx={{ color: pink[500] }} />
