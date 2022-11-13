@@ -12,6 +12,10 @@ const todoListSchema = new mongoose.Schema({
   isComplete: {
     type: Boolean,
     default: false
+  },
+  disabledEdit: {
+    type: Boolean,
+    default: true
   }
 },
   {

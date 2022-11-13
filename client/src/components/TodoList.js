@@ -11,7 +11,7 @@ const TodoList = () => {
 
   const [newTodo, setNewTodo] = useState("")
   const [update, setUpdate] = useState("")
-  const [isDisable, setIsDisable] = useState(true)
+
 
   const {
     data: todos,
@@ -30,15 +30,6 @@ const TodoList = () => {
     addTodo({ userId: "636caa044d1c41aede6375f8", desc: newTodo })
   }
 
-  const handleDisable = () => {
-    if (isDisable) {
-      setIsDisable(false)
-    }
-    if (!isDisable) {
-      setIsDisable(true)
-    }
-  }
-
 
   let content
 
@@ -46,6 +37,7 @@ const TodoList = () => {
     content = <Typography variant="h6" >Loading...</Typography>
   } else if (isSuccess) {
     content = todos.map(todo => {
+
       return (
         <Box key={todo._id} sx={{
           width: 650,
@@ -53,16 +45,18 @@ const TodoList = () => {
           display: "flex",
           p: 2
         }}>
-          <TextField disabled={isDisable} fullWidth defaultValue={todo.desc} variant="outlined"
+          <TextField disabled={todo.disabledEdit} fullWidth defaultValue={todo.desc} variant="outlined"
             onChange={e => setUpdate(e.target.value)}
           />
-          <Button><Checkbox defaultChecked color="success" /></Button>
-          <Button onClick={handleDisable}>
-            <EditIcon />
+          <Button onClick={() => updateTodo({ ...todo, isComplete: !todo.isComplete })}>
+            <Checkbox checked={todo.isComplete} color="success" />
           </Button>
-          <Button onClick={() => updateTodo({ ...todo, desc: update })}>
-            <AutorenewIcon color="primary" />
+          <Button onClick={
+            () => updateTodo({ ...todo, desc: update || todo.desc, disabledEdit: !todo.disabledEdit })
+          }>
+            {todo.disabledEdit ? <EditIcon /> : <AutorenewIcon />}
           </Button>
+
           <Button onClick={() => deleteTodo({ id: todo._id })}>
             <DeleteForeverIcon sx={{ color: pink[500] }} />
           </Button>

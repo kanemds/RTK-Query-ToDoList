@@ -10,7 +10,7 @@ router.get('/', getUsers)
 router.post('/register', register)
 router.post('/signin', signIn)
 router.put('/update/:id', userUpdate)
-router.delete('/delete/:id', verifyToken, deleteUser)
+router.delete('/delete/:id', deleteUser)
 
 module.exports = router
 
