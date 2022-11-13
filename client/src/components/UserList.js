@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from '../features/api/userSlice'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import { pink } from '@mui/material/colors'
@@ -8,6 +8,9 @@ import AutorenewIcon from '@mui/icons-material/Autorenew'
 import EditIcon from '@mui/icons-material/Edit'
 
 const UserList = () => {
+
+  const [update, setUpdate] = useState("")
+  const [isDisable, setIsDisable] = useState(true)
 
   const {
     data: users,
@@ -20,6 +23,15 @@ const UserList = () => {
   const [updateUser] = useUpdateUserMutation()
   const [deleteUser] = useDeleteUserMutation()
 
+  const handleDisable = () => {
+    if (isDisable) {
+      setIsDisable(false)
+    }
+    if (!isDisable) {
+      setIsDisable(true)
+    }
+  }
+
 
   let content
 
@@ -28,21 +40,40 @@ const UserList = () => {
   } else if (isSuccess) {
     content = users.map(user => {
       return (
-        <Box key={user._id}>
-          <TextField fullWidth defaultValue={user.name} variant="outlined"
-
+        <Box key={user._id}
+          sx={{
+            width: 650,
+            maxWidth: '100%',
+            display: "flex",
+            p: 2
+          }}>
+          <TextField disabled={isDisable} fullWidth defaultValue={user.name} variant="outlined"
+            onChange={e => setUpdate(e.target.value)}
           />
+
+          <Button onClick={handleDisable}>
+            <EditIcon />
+          </Button>
+          <Button onClick={() => updateUser({ ...user, name: update })}>
+            <AutorenewIcon color="primary" />
+          </Button>
+          <Button onClick={() => deleteUser({ id: user._id })}>
+            <DeleteForeverIcon sx={{ color: pink[500] }} />
+          </Button>
         </Box>
       )
     })
   } else if (isError) {
-    content = <Typography>{error}</Typography>
+    content = <Typography variant="h6" >{error}</Typography>
   }
 
   return (
-    <>
-      {content}
-    </>
+    <Box sx={{ display: "flex", justifyContent: "center", pt: 6 }}>
+      <Paper sx={{ width: 700, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", p: 4 }}>
+        <Typography variant="h3">User List</Typography>
+        {content}
+      </Paper>
+    </Box >
   )
 }
 
