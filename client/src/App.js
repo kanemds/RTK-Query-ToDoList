@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import styled, { ThemeProvider } from "styled-components"
 import Register from './components/Register'
+import Signin from './components/Signin'
 
 
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/signin' element={<Signin />} />
         <Route path='/todolist' element={<TodoList />} />
         <Route path='/userlist' element={<UserList />} />
 
