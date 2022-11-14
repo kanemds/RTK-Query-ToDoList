@@ -6,6 +6,14 @@ export const userSlice = apiSlice.injectEndpoints({
       query: () => '/user',
       providesTags: ['Users']
     }),
+    createUser: builder.mutation({
+      query: user => ({
+        url: '/user/register',
+        method: 'POST',
+        body: user
+      }),
+      invalidatesTags: ['Users']
+    }),
     updateUser: builder.mutation({
       query: user => ({
         url: `/user/update/${user._id}`,
@@ -25,4 +33,4 @@ export const userSlice = apiSlice.injectEndpoints({
   })
 })
 
-export const { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation } = userSlice
+export const { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation, useCreateUserMutation } = userSlice
