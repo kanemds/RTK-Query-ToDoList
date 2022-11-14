@@ -79,11 +79,11 @@ const Register = () => {
             }}
           />
           {validUserName || userName.length === 0 ? "" : <Typography>User Name must be 4 to 24 characters(Letters and Numbers only) </Typography>}
-          <TextField fullWidth type='password' label='userPassword' variant='outlined' required sx={{ m: 3 }}
+          <TextField fullWidth type='password' label='Password' variant='outlined' required sx={{ m: 3 }}
             onChange={e => setUserPassword(e.target.value)}
           />
           {validuserPassword || userPassword.length === 0 ? "" : <Typography>Invalided Password</Typography>}
-          <TextField fullWidth type='password' label='userPassword Comfirm' variant='outlined' required sx={{ m: 3 }}
+          <TextField fullWidth type='password' label='Password Comfirm' variant='outlined' required sx={{ m: 3 }}
             onChange={e => setComfirm(e.target.value)}
           />
           {isMatch || comfirm.length === 0 ? "" : <Typography>Please match with userPassword</Typography>}
