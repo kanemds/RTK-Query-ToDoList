@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Paper, Box, Button, TextField, Typography, Link } from '@mui/material'
 import { pink } from '@mui/material/colors'
 import { useSignInUserMutation } from '../features/api/userSlice'
@@ -8,17 +9,14 @@ const Signin = () => {
   const [userName, setUserName] = useState("")
   const [userPassword, setUserPassword] = useState("")
 
+  const navigate = useNavigate()
 
   const [signInUser, response] = useSignInUserMutation()
 
   const handleSubmit = e => {
     e.preventDefault()
-
     signInUser({ name: userName, password: userPassword })
-
-
-
-
+    navigate('/todolist')
   }
 
 
@@ -26,9 +24,6 @@ const Signin = () => {
 
   return (
     <Box sx={{ height: '70vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-
-
-
 
       <Paper sx={{ width: '600px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', p: 3 }}>
 
