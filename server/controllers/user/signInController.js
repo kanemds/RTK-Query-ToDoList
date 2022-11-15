@@ -9,7 +9,7 @@ const signIn = async (req, res) => {
   try {
     const userName = req.body.name
     const currentUser = await User.findOne({ name: userName })
-    if (!currentUser) return res.status(401).json("Not Authorized")
+    if (!currentUser) return res.status(401).json("Not Authorized Please Try Again")
 
     const isCorrect = await bcrypt.compare(req.body.password, currentUser.password)
     if (!isCorrect) return res.status(401).json("Not Authorized")
