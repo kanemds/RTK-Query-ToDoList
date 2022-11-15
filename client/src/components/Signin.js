@@ -8,16 +8,31 @@ const Signin = () => {
 
   const [userName, setUserName] = useState("")
   const [userPassword, setUserPassword] = useState("")
+  const [errorMessage, seterrorMessage] = useState('')
 
   const navigate = useNavigate()
 
   const [signInUser, response] = useSignInUserMutation()
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    signInUser({ name: userName, password: userPassword })
-    navigate('/todolist')
+    try {
+      const res = await signInUser({ name: userName, password: userPassword }).unwrap()
+      console.log(res)
+      navigate('/todolist')
+    } catch (error) {
+      if (!error?.originalStatus) {
+        seterrorMessage('No Server Response')
+      } else if (error.originalStatus.status === 400) {
+        seterrorMessage('Missing User Name, Email or Password')
+      } else if (error.originalStatus.status === 401) {
+        seterrorMessage('Unauthorized')
+      } else {
+        seterrorMessage('Login Failed')
+      }
+    }
   }
+
 
 
 

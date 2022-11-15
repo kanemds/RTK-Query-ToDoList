@@ -16,7 +16,7 @@ const signIn = async (req, res) => {
 
     const createdToken = jwt.sign({ id: currentUser._id, isAdmin: currentUser.isAdmin }, process.env.ACCESS_TOKEN_SECRET)
 
-    res.cookie('access_token', createdToken, { httpOnly: true }).status(200).json(`${userName} has logged in.`)
+    res.cookie('access_token', createdToken, { httpOnly: true }).status(200).json({ id: currentUser._id, accessToken: createdToken })
 
   } catch (error) {
     res.status(400).json(error)
