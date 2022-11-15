@@ -12,7 +12,7 @@ const signIn = async (req, res) => {
     if (!currentUser) return res.status(401).json("Not Authorized Please Try Again")
 
     const isCorrect = await bcrypt.compare(req.body.password, currentUser.password)
-    if (!isCorrect) return res.status(401).json("Not Authorized")
+    if (!isCorrect) return res.status(401).json("Not Authorized Please Try Again")
 
     const createdToken = jwt.sign({ id: currentUser._id, isAdmin: currentUser.isAdmin }, process.env.ACCESS_TOKEN_SECRET)
 
