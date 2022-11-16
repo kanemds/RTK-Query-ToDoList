@@ -6,12 +6,15 @@ import { Paper, TextField, Button, Box, Checkbox, ButtonGroup, Typography } from
 import AutorenewIcon from '@mui/icons-material/Autorenew'
 import EditIcon from '@mui/icons-material/Edit'
 import { useGetTodosQuery, useAddTodoMutation, useUpdateTodoMutation, useDeleteTodoMutation } from '../features/api/todoSlice'
+import { useSelector } from 'react-redux'
+import { selectedUser } from '../features/reducers/authSlice'
 
 const TodoList = () => {
 
   const [newTodo, setNewTodo] = useState("")
   const [update, setUpdate] = useState("")
-
+  const currentUser = useSelector(selectedUser)
+  console.log(currentUser)
 
   const {
     data: todos,
