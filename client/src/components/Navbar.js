@@ -29,13 +29,22 @@ const Navbar = () => {
       </Grid>
       <Grid xs={6}></Grid>
       <Grid xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-        {currentUser.token != null ?
-          <Button onClick={handleLogOut} sx={{ color: 'white', mr: 3 }} >Log Out</Button>
-          :
+        {currentUser.token == null ?
           <>
-            <Button><Link href='/signin' underline="none" sx={{ color: 'white', mr: 3 }}>Sign In</Link></Button>
-            <Button><Link href='/register' underline="none" sx={{ color: 'white', mr: 3 }}>Register</Link></Button>
+            <Button onClick={() => navigate('/signin')} sx={{ color: 'white', mr: 3 }}>Sign In</Button>
+            <Button onClick={() => navigate('/register')} sx={{ color: 'white', mr: 3 }}>Register</Button>
           </>
+          : currentUser.admin ?
+            <>
+              <Button onClick={() => navigate('/todolist')} sx={{ color: 'white', mr: 3 }} >Go Goals</Button>
+              <Button onClick={() => navigate('/userlist')} sx={{ color: 'white', mr: 3 }} >Admin</Button>
+              <Button onClick={handleLogOut} sx={{ color: 'white', mr: 3 }} >Log Out</Button>
+            </>
+            :
+            <>
+              <Button onClick={() => navigate('/todolist')} sx={{ color: 'white', mr: 3 }} >Go Goals</Button>
+              <Button onClick={handleLogOut} sx={{ color: 'white', mr: 3 }} >Log Out</Button>
+            </>
         }
       </Grid>
     </Grid >
