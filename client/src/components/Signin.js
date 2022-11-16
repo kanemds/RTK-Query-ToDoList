@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { Paper, Box, Button, TextField, Typography, Link } from '@mui/material'
 import { pink } from '@mui/material/colors'
 import { useSignInUserMutation } from '../features/api/userSlice'
+import { useDispatch } from 'react-redux'
+import { currentUser } from '../features/reducers/authSlice'
 
 const Signin = () => {
 
@@ -11,6 +13,7 @@ const Signin = () => {
   const [errorMessage, seterrorMessage] = useState('')
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [signInUser, response] = useSignInUserMutation()
 
@@ -19,6 +22,7 @@ const Signin = () => {
     try {
       const res = await signInUser({ name: userName, password: userPassword }).unwrap()
       console.log(res)
+      dispatch(currentUser({ ...res }))
       navigate('/todolist')
     } catch (error) {
       if (!error?.originalStatus) {
