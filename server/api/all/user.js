@@ -6,7 +6,7 @@ const signIn = require('../../controllers/user/signInController')
 const getUsers = require('../../controllers/user/getUsersController')
 const verifyToken = require('../../utility/verifyToken')
 
-router.get('/', getUsers)
+router.get('/', verifyToken, getUsers)
 router.post('/register', register)
 router.post('/signin', signIn)
 router.put('/update/:id', userUpdate)
