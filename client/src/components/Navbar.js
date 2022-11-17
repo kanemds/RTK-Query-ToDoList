@@ -4,6 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useSignOutUserMutation } from '../features/api/userSlice'
 import { selectedUser, logOut } from '../features/reducers/authSlice'
 
 
@@ -13,8 +14,12 @@ const Navbar = () => {
   const navigate = useNavigate()
   const currentUser = useSelector(selectedUser)
 
+  console.log(currentUser)
+  const [signOut] = useSignOutUserMutation()
+
 
   const handleLogOut = () => {
+    signOut()
     dispatch(logOut())
     navigate('/')
   }

@@ -37,8 +37,16 @@ export const userSlice = apiSlice.injectEndpoints({
         body: id
       }),
       invalidatesTags: ['Users']
+    }),
+    signOutUser: builder.mutation({
+      query: () => ({
+        url: '/user/signout',
+        method: 'POST',
+        body: ""
+      }),
+      invalidatesTags: ['Users']
     })
   })
 })
 
-export const { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation, useCreateUserMutation, useSignInUserMutation } = userSlice
+export const { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation, useCreateUserMutation, useSignInUserMutation, useSignOutUserMutation } = userSlice
