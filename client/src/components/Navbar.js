@@ -12,7 +12,7 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const currentUser = useSelector(selectedUser)
-  console.log(currentUser)
+
 
   const handleLogOut = () => {
     dispatch(logOut())

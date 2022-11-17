@@ -30,9 +30,10 @@ const TodoList = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    addTodo({ userId: "636caa044d1c41aede6375f8", desc: newTodo })
+    addTodo({ userId: currentUser.id, desc: newTodo })
   }
 
+  console.log(todos)
 
   let content
 
