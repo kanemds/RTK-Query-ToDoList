@@ -5,7 +5,7 @@ const createTodo = async (req, res) => {
 
   try {
     const newTodo = new TodoList(req.body)
-    console.log(req.body)
+
     await newTodo.save()
     res.status(200).json("Added to List")
   } catch (error) {
