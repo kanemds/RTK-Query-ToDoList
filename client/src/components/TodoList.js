@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import { pink } from '@mui/material/colors'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
@@ -13,6 +13,7 @@ const TodoList = () => {
 
   const [newTodo, setNewTodo] = useState("")
   const [update, setUpdate] = useState("")
+  const [refresh, setRefresh] = useState([])
   const currentUser = useSelector(selectedUser)
   console.log(currentUser)
 
