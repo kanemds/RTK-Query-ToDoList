@@ -19,10 +19,12 @@ const Navbar = () => {
 
 
   const handleLogOut = () => {
+
     signOut()
     dispatch(logOut())
     navigate('/')
   }
+
 
   return (
 

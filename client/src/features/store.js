@@ -15,10 +15,22 @@ const persistConfig = {
   storage
 }
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: authReducer
 })
+
+const rootReducer = (state, action) => {
+  if (action.type === 'auth/logOut') {
+    // for all keys defined in your persistConfig(s)
+    storage.removeItem('persist:root')
+    // storage.removeItem('persist:otherKey')
+
+    return appReducer(undefined, action)
+  }
+  return appReducer(state, action)
+}
+
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
