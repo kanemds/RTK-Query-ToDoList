@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
+const path = require('path')
 
 const routes = require('./api/routes')
 
@@ -21,10 +22,9 @@ mongoose.connect(DB)
     console.log(error)
   })
 
-app.get('/', (req, res) => {
-  res.send('hey')
-})
+
 
 app.use(cookieParser())
 app.use(express.json())
+app.use('/', express.static(path.join(__dirname, '/public')))
 app.use('/', routes)

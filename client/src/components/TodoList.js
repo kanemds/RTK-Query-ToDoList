@@ -24,6 +24,7 @@ const TodoList = () => {
     isError,
     error
   } = useGetTodosQuery()
+
   const [addTodo] = useAddTodoMutation()
   const [updateTodo] = useUpdateTodoMutation()
   const [deleteTodo] = useDeleteTodoMutation()
